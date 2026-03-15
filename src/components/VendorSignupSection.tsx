@@ -83,11 +83,21 @@ export default function VendorSignupSection() {
       return;
     }
     setLoading(true);
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
-    setSubmitted(true);
-    toast.success("Vendor application submitted! We'll contact you within 48 hours.");
+    try {
+      const res = await fetch('/api/vendor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed');
+      setSubmitted(true);
+      toast.success("Vendor application submitted! We'll contact you within 48 hours.");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Submission failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

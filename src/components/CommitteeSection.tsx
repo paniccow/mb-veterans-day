@@ -27,6 +27,12 @@ const committee = [
     icon: "📚",
     description: "Manhattan Beach City Historian ensuring the celebration honors the full depth of our community's military heritage.",
   },
+  {
+    name: "Ishaan Aggarwal",
+    role: "Digital & Technology",
+    icon: "💻",
+    description: "Leads digital strategy, website development, and technology initiatives for the Veterans Day celebration.",
+  },
 ];
 
 export default function CommitteeSection() {
@@ -41,7 +47,7 @@ export default function CommitteeSection() {
           subtitle="Dedicated community leaders working together to honor Manhattan Beach veterans."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {committee.map((member, i) => (
             <motion.div
               key={member.name}
