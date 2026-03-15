@@ -186,7 +186,7 @@ export default function HeroSection() {
           Veterans
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-orange-400">
-            Day 2025
+            Day 2026
           </span>
         </motion.h1>
 
