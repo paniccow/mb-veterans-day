@@ -16,11 +16,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Manhattan Beach Veterans Day 2025 | Honoring Those Who Served",
+  title: "Manhattan Beach Veterans Day 2026 | Honoring Those Who Served",
   description: "Join us for Manhattan Beach's annual Veterans Day Celebration — featuring military displays, student performances, veteran recognition, and community engagement.",
   openGraph: {
-    title: "Manhattan Beach Veterans Day 2025",
-    description: "Honoring the brave men and women who served our nation. November 11, 2025.",
+    title: "Manhattan Beach Veterans Day 2026",
+    description: "Honoring the brave men and women who served our nation. November 11, 2026.",
     type: "website",
   },
 };

@@ -69,7 +69,7 @@ export default function AttendeeRegisterSection() {
               {
                 icon: "🕙",
                 title: "Date & Time",
-                detail: "Tuesday, November 11, 2025\n10:00 AM – 1:00 PM\n(Gates open 8:00 AM)",
+                detail: "Tuesday, November 11, 2026\n10:00 AM – 1:00 PM\n(Gates open 8:00 AM)",
               },
               {
                 icon: "🆓",

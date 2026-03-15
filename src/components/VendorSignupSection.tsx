@@ -149,11 +149,11 @@ export default function VendorSignupSection() {
               </h4>
               <div className="space-y-3">
                 {[
-                  { date: "Oct 1, 2025", event: "Vendor applications open" },
-                  { date: "Oct 25, 2025", event: "Application deadline" },
-                  { date: "Nov 1, 2025", event: "Acceptance notifications sent" },
-                  { date: "Nov 10, 2025", event: "Vendor setup & load-in day" },
-                  { date: "Nov 11, 2025", event: "Event Day — 8am to 1pm" },
+                  { date: "Oct 1, 2026", event: "Vendor applications open" },
+                  { date: "Oct 25, 2026", event: "Application deadline" },
+                  { date: "Nov 1, 2026", event: "Acceptance notifications sent" },
+                  { date: "Nov 10, 2026", event: "Vendor setup & load-in day" },
+                  { date: "Nov 11, 2026", event: "Event Day — 8am to 1pm" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" />

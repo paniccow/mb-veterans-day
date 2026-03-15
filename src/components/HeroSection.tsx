@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { StarField } from "./AnimatedStar";
 
 const serviceColors = ["#003087", "#b22234", "#004165", "#c8102e", "#005f86", "#00308F"];
@@ -40,10 +40,15 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 }
 
 function Countdown() {
-  const target = new Date("2025-11-11T10:00:00");
-  const now = new Date();
-  const diff = Math.max(0, target.getTime() - now.getTime());
+  const target = new Date("2026-11-11T10:00:00");
+  const [now, setNow] = useState(new Date());
 
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const diff = Math.max(0, target.getTime() - now.getTime());
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -162,7 +167,7 @@ export default function HeroSection() {
           className="mb-8 px-4 py-2 rounded-full border border-red-700/50 bg-red-900/20 backdrop-blur-sm"
         >
           <span className="text-red-300 text-sm font-semibold tracking-widest uppercase font-[var(--font-inter)]">
-            November 11, 2025 • Manhattan Beach, California
+            November 11, 2026 • Manhattan Beach, California
           </span>
         </motion.div>
 
