@@ -86,7 +86,7 @@ const staticDisplays = [
 
 export default function MilitaryDisplaysSection() {
   return (
-    <section id="displays" className="py-24 bg-[#080d14] relative">
+    <section id="displays" className="py-24 scroll-mt-16 bg-[#080d14] relative">
       {/* Top gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-800/40 to-transparent" />
 

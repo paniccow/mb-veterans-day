@@ -56,9 +56,10 @@ export function SectionTitle({ title, subtitle, accent }: {
     <div className="text-center mb-16">
       {accent && (
         <motion.p
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="text-red-400 text-sm font-semibold tracking-widest uppercase mb-3 font-[var(--font-inter)]"
         >
           {accent}
@@ -68,17 +69,17 @@ export function SectionTitle({ title, subtitle, accent }: {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: 0.08, duration: 0.6 }}
         className="text-4xl md:text-5xl font-bold text-white font-[var(--font-playfair)] mb-4"
       >
         {title}
       </motion.h2>
       {subtitle && (
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.18, duration: 0.6 }}
           className="text-gray-400 text-lg max-w-2xl mx-auto font-[var(--font-inter)]"
         >
           {subtitle}

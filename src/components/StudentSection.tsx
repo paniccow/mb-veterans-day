@@ -52,7 +52,7 @@ const initiatives = [
 
 export default function StudentSection() {
   return (
-    <section id="students" className="py-24 bg-[#0d1117] relative overflow-hidden">
+    <section id="students" className="py-24 scroll-mt-16 bg-[#0d1117] relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 right-0 w-96 h-96 rounded-full opacity-10"
           style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)" }} />

@@ -29,9 +29,9 @@ const committee = [
   },
   {
     name: "Ishaan Aggarwal",
-    role: "Digital & Technology",
+    role: "Committee Member",
     icon: "💻",
-    description: "Leads digital strategy, website development, and technology initiatives for the Veterans Day celebration.",
+    description: "Committee member and creator of this website — bringing digital strategy and technology to the Veterans Day celebration.",
   },
 ];
 

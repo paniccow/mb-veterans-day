@@ -101,7 +101,7 @@ export default function VendorSignupSection() {
   };
 
   return (
-    <section id="vendors" className="py-24 bg-[#0d1117] relative overflow-hidden">
+    <section id="vendors" className="py-24 scroll-mt-16 bg-[#0d1117] relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-10"

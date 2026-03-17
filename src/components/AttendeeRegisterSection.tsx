@@ -58,7 +58,7 @@ export default function AttendeeRegisterSection() {
   };
 
   return (
-    <section id="register" className="py-24 bg-[#080d14] relative">
+    <section id="register" className="py-24 scroll-mt-16 bg-[#080d14] relative">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-800/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

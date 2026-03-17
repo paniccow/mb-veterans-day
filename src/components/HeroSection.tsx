@@ -83,6 +83,7 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       id="event"
+      style={{ scrollMarginTop: '0px' }}
     >
       {/* Deep navy gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#020818] via-[#0d1b35] to-[#0d1117]" />
@@ -157,7 +158,7 @@ export default function HeroSection() {
 
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto"
+        className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto pt-20"
       >
         {/* Top badge */}
         <motion.div
@@ -180,7 +181,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.3 }}
-          className="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-none font-[var(--font-playfair)] mb-4"
+          className="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-tight font-[var(--font-playfair)] mb-6"
           style={{ textShadow: "0 4px 40px rgba(0,0,0,0.8), 0 0 80px rgba(178,34,52,0.2)" }}
         >
           Veterans
