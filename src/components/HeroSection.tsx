@@ -1,37 +1,14 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { StarField } from "./AnimatedStar";
-
-const serviceColors = ["#003087", "#b22234", "#004165", "#c8102e", "#005f86", "#00308F"];
-
-function FloatingRibbon({ text, delay = 0 }: { text: string; delay?: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay, duration: 0.8 }}
-      className="flex items-center gap-2"
-    >
-      <div className="w-8 h-0.5 bg-red-500" />
-      <span className="text-xs tracking-widest text-red-400 uppercase font-[var(--font-inter)] font-semibold">
-        {text}
-      </span>
-    </motion.div>
-  );
-}
 
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <motion.div
-        key={value}
-        initial={{ scale: 1.2, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        className="text-4xl md:text-5xl font-bold text-white font-[var(--font-inter)] tabular-nums min-w-[3rem] text-center"
-      >
+      <div className="text-4xl md:text-5xl font-bold text-white font-[var(--font-inter)] tabular-nums min-w-[3rem] text-center">
         {String(value).padStart(2, "0")}
-      </motion.div>
+      </div>
       <div className="text-xs text-gray-400 uppercase tracking-wider mt-1 font-[var(--font-inter)]">
         {label}
       </div>
@@ -55,12 +32,7 @@ function Countdown() {
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.2 }}
-      className="flex gap-6 md:gap-10"
-    >
+    <div className="flex gap-6 md:gap-10">
       <CountdownUnit value={days} label="Days" />
       <div className="text-4xl md:text-5xl text-gray-500 font-bold self-start pt-1">:</div>
       <CountdownUnit value={hours} label="Hours" />
@@ -68,74 +40,36 @@ function Countdown() {
       <CountdownUnit value={minutes} label="Minutes" />
       <div className="text-4xl md:text-5xl text-gray-500 font-bold self-start pt-1">:</div>
       <CountdownUnit value={seconds} label="Seconds" />
-    </motion.div>
+    </div>
   );
 }
 
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
   return (
     <section
-      ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       id="event"
-      style={{ scrollMarginTop: '0px' }}
+      style={{ scrollMarginTop: "0px" }}
     >
-      {/* Deep navy gradient background */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#020818] via-[#0d1b35] to-[#0d1117]" />
 
-      {/* Stars */}
-      <StarField count={80} />
+      {/* Stars — CSS-only, no Framer Motion */}
+      <StarField count={70} />
 
-      {/* Animated gradient orbs */}
-      <motion.div
-        className="absolute top-20 left-1/4 w-96 h-96 rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(178,34,52,0.15) 0%, transparent 70%)",
-        }}
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      {/* Subtle red glow — static, no animation */}
+      <div
+        className="absolute top-20 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(178,34,52,0.12) 0%, transparent 70%)" }}
       />
-      <motion.div
-        className="absolute bottom-40 right-1/4 w-96 h-96 rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(0,48,135,0.2) 0%, transparent 70%)",
-        }}
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.4, 0.7, 0.4],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      <div
+        className="absolute bottom-40 right-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(0,48,135,0.15) 0%, transparent 70%)" }}
       />
 
-      {/* American flag stripes — subtle */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute left-0 right-0 h-[1px]"
-            style={{
-              top: `${14 * i + 7}%`,
-              background: i % 2 === 0
-                ? "linear-gradient(90deg, transparent, rgba(178,34,52,0.08), transparent)"
-                : "linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent)",
-            }}
-            animate={{ scaleX: [0.8, 1.0, 0.8], opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut" }}
-          />
-        ))}
-      </div>
-
-      {/* Flag silhouette on the right */}
-      <motion.div
-        className="absolute right-0 top-0 bottom-0 w-2/5 pointer-events-none opacity-5"
+      {/* Flag silhouette — static */}
+      <div
+        className="absolute right-0 top-0 bottom-0 w-2/5 pointer-events-none opacity-[0.04]"
         style={{
           backgroundImage: `repeating-linear-gradient(
             to bottom,
@@ -156,15 +90,13 @@ export default function HeroSection() {
         }}
       />
 
-      <motion.div
-        style={{ y, opacity }}
-        className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto pt-20"
-      >
+      {/* Content — simple fade-in animations, no scroll-driven transforms */}
+      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto pt-20">
         {/* Top badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="mb-8 px-4 py-2 rounded-full border border-red-700/50 bg-red-900/20 backdrop-blur-sm"
         >
           <span className="text-red-300 text-sm font-semibold tracking-widest uppercase font-[var(--font-inter)]">
@@ -172,15 +104,23 @@ export default function HeroSection() {
           </span>
         </motion.div>
 
-        <div className="flex flex-col gap-2 mb-4">
-          <FloatingRibbon text="Honoring All Who Served" delay={0.2} />
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="flex items-center gap-2 mb-4"
+        >
+          <div className="w-8 h-0.5 bg-red-500" />
+          <span className="text-xs tracking-widest text-red-400 uppercase font-[var(--font-inter)] font-semibold">
+            Honoring All Who Served
+          </span>
+        </motion.div>
 
         {/* Main title */}
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
           className="text-6xl md:text-8xl lg:text-9xl font-bold text-white leading-tight font-[var(--font-playfair)] mb-6"
           style={{ textShadow: "0 4px 40px rgba(0,0,0,0.8), 0 0 80px rgba(178,34,52,0.2)" }}
         >
@@ -194,7 +134,7 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
           className="text-xl md:text-2xl text-gray-300 max-w-2xl leading-relaxed mb-10 font-[var(--font-inter)]"
         >
           Manhattan Beach celebrates and honors the brave men and women who
@@ -205,7 +145,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: 0.55 }}
           className="mb-10 p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10"
         >
           <p className="text-xs text-gray-500 uppercase tracking-widest mb-4 font-[var(--font-inter)]">Event Begins In</p>
@@ -216,57 +156,50 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3 }}
+          transition={{ delay: 0.7 }}
           className="flex flex-wrap gap-4 justify-center"
         >
           <motion.a
             href="#register"
-            className="px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-bold rounded-xl text-lg transition-all duration-300 pulse-glow font-[var(--font-inter)]"
-            whileHover={{ scale: 1.05, y: -2 }}
+            className="px-8 py-4 bg-red-700 hover:bg-red-600 text-white font-bold rounded-xl text-lg transition-colors duration-200 pulse-glow font-[var(--font-inter)]"
+            whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
           >
             Register to Attend
           </motion.a>
           <motion.a
             href="#vendors"
-            className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-xl text-lg border border-white/20 transition-all duration-300 font-[var(--font-inter)]"
-            whileHover={{ scale: 1.05, y: -2 }}
+            className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-xl text-lg border border-white/20 transition-colors duration-200 font-[var(--font-inter)]"
+            whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
           >
             Food Vendor Sign-Up
           </motion.a>
         </motion.div>
 
-        {/* Service branches icons row */}
+        {/* Service branches */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
+          transition={{ delay: 0.9 }}
           className="mt-16 flex flex-wrap justify-center gap-4 text-xs text-gray-500 font-[var(--font-inter)]"
         >
-          {["Army", "Navy", "Air Force", "Marines", "Coast Guard", "Space Force"].map((branch, i) => (
-            <motion.span
+          {["Army", "Navy", "Air Force", "Marines", "Coast Guard", "Space Force"].map((branch) => (
+            <span
               key={branch}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.6 + i * 0.1 }}
-              className="px-3 py-1 rounded-full border border-white/10 text-gray-400 hover:border-red-500/50 hover:text-red-300 transition-all"
+              className="px-3 py-1 rounded-full border border-white/10 text-gray-400 hover:border-red-500/50 hover:text-red-300 transition-colors duration-200"
             >
               {branch}
-            </motion.span>
+            </span>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-indicator">
         <span className="text-xs text-gray-500 tracking-widest uppercase font-[var(--font-inter)]">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-gray-500 to-transparent" />
-      </motion.div>
+      </div>
     </section>
   );
 }

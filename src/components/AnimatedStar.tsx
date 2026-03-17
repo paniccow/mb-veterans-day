@@ -1,43 +1,35 @@
 "use client";
-import { motion } from "framer-motion";
-
-export function AnimatedStar({ delay = 0, x = 50, y = 50, size = 2 }: {
-  delay?: number;
-  x?: number;
-  y?: number;
-  size?: number;
-}) {
-  return (
-    <motion.div
-      className="absolute rounded-full bg-white"
-      style={{ left: `${x}%`, top: `${y}%`, width: size, height: size }}
-      animate={{
-        opacity: [0.2, 1, 0.2],
-        scale: [1, 1.5, 1],
-      }}
-      transition={{
-        duration: 2 + Math.random() * 2,
-        repeat: Infinity,
-        delay,
-        ease: "easeInOut",
-      }}
-    />
-  );
-}
+import { useMemo } from "react";
 
 export function StarField({ count = 60 }: { count?: number }) {
-  const stars = Array.from({ length: count }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    delay: Math.random() * 3,
-  }));
+  const stars = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        id: i,
+        x: (i * 137.508) % 100, // golden-angle distribution for even spread
+        y: (i * 97.3) % 100,
+        size: (i % 3) + 1,
+        duration: 2 + (i % 4),
+        delay: (i * 0.37) % 3,
+      })),
+    [count]
+  );
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {stars.map((star) => (
-        <AnimatedStar key={star.id} {...star} />
+        <div
+          key={star.id}
+          className="absolute rounded-full bg-white star-twinkle"
+          style={{
+            left: `${star.x}%`,
+            top: `${star.y}%`,
+            width: star.size,
+            height: star.size,
+            animationDuration: `${star.duration}s`,
+            animationDelay: `${star.delay}s`,
+          }}
+        />
       ))}
     </div>
   );

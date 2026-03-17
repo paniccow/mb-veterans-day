@@ -60,6 +60,25 @@ body {
   animation: wave 3s ease-in-out infinite;
 }
 
+.star-twinkle {
+  animation: star-twinkle var(--star-dur, 3s) ease-in-out infinite;
+  opacity: 0.3;
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.9; }
+}
+
+.scroll-indicator {
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
