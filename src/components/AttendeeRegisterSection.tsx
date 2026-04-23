@@ -65,7 +65,7 @@ export default function AttendeeRegisterSection() {
         <SectionTitle
           accent="RSVP"
           title="Register to Attend"
-          subtitle="Help us plan the perfect event. Registration is free and only takes a minute."
+          subtitle="Help us plan the perfect event. Registration is not required, but free and only takes a minute."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">

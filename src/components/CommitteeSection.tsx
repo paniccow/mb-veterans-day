@@ -10,7 +10,7 @@ const committee = [
     description: "Leads the planning committee with a vision for the most impactful Veterans Day celebration in Manhattan Beach history.",
   },
   {
-    name: "Stephan Doran",
+    name: "Stephen Doran",
     role: "Committee Member",
     icon: "🎖️",
     description: "Brings organizational expertise and community connections to ensure seamless event coordination.",
